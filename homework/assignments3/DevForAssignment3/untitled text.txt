@@ -1,0 +1,22 @@
+(define min-split (lambda (L s1 s2 mini) ;;Initiates function 'min-split' and variables used: list 'L', int 's1', int 's2', int 'mini' (3 Auxilliary parameters)
+(cond
+((null? L) ;;Outputs the end result of minimum difference when 'L' is empty
+(if (> 0 mini) ;;Converts negative 'mini' to positive
+(min-split L s1 s2 (- mini (+ mini mini))) ;;IF 'mini' is negative
+mini ;;ELSE output mini. END OF LINE
+)
+)
+
+;;IF 's2' is greater than the next element in 'L' plus what is already in 's1'
+((> (+ s2 (car L)) (- (+ s1 (car L)) 1))
+(min-split (cdr L) (+ s1 (car L)) s2 (- (+ (car L) s1) s2))
+;;THEN adds 'L' next item to 's1' and make 'mini' == (s1 - s2)
+)
+
+;;ELSE 's1' is greater than the next element in 'L' plus what is already in 's2'
+;;OR 's1' and 's2' are equals
+(else
+(min-split (cdr L) s1 (+ s2 (car L)) (- (+ (car L) s2) s1))
+;;THEN adds 'L' next item to 's2' and make 'mini' == (s2 - s1)
+)
+)

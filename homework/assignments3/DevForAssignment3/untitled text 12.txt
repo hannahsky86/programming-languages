@@ -1,0 +1,19 @@
+(define has-target? (lambda (List s1 s2 t1 t2 b1 b2) 
+  (cond
+    [(null? List)
+     (and
+       (=  s1 t1)
+       (=  s2 t2)
+       b1
+       b2
+      )
+     ]
+    [else
+     (or
+      (has-target? (cdr List)  (+ (car List) s1) s2 t1 t2  b1 b2)
+      (has-target? (cdr List)  s1 (+ (car List) s2) t1 t2 b1 b2)
+      (has-target? (cdr List) (+ (car List) s1) s2 t1 (car List) b1 #t)
+      (has-target? (cdr List) s1 (+ (car List) s2) (car List) t2 #t b2)
+     )
+     ]
+ )))

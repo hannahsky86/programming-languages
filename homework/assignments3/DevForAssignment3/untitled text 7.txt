@@ -1,0 +1,59 @@
+(define (Match myList)
+  (if(null? myList)
+      #f
+      (if(= 1 (car myList))
+         #t
+         (Match (cdr myList)))))
+         
+         
+
+
+
+(define (Match myList x) 
+  (cond [(null? myList) #f]
+         [(= x (car myList)) #t]
+         [else (Match (cdr myList) x)]))
+
+
+
+(define (subset-sum-zero? ar)
+    (define (sum-for-index idx b)
+        (cond [b #t]
+            [(> idx (sub1 (length ar))) #f]
+            [else (begin
+                    (let* ([v (list-ref ar idx)]
+                            [s (map (lambda (n) (+ n v)) ar)])
+                        (if (member 0 s)
+                            #t
+                            (sum-for-index (add1 idx) #f))))]))
+
+    (cond [(eq? null ar) #f]
+            [(member 0 ar) #t]
+            [else (sum-for-index 0 #f)]))
+
+(subset-sum-zero? '(1 2 3))
+(subset-sum-zero? '(-5 -3 -1 2 4 6))
+(subset-sum-zero? '())
+(subset-sum-zero? '(1 -1))
+(subset-sum-zero? '(97364 -71561 -69336 19675 71561 97863))
+(subset-sum-zero? '(-53974 -39140 -36561 -23935 -15680 0))
+
+
+
+(has-subtarget? 0 0 0 0 0 '(1 2 3 4)) 
+
+(define has-subtarget?
+  (lambda (addToA addToB thirdSetVal sumA sumB lst)
+      (cond
+     ((and (and (and (and (null? (cdr'(lst))) (= sumA sumB)) (> 0 sumA)) (> 0 sumB)) (= sumA thirdSetVal)) #t)
+     (else ;; calls r twice + discard results
+          (has-subtarget? 0 (car'(lst)) thirdSetVal (+ addToA sumA) (+ addToB sumB) (cdr'(lst)))
+                    (has-subtarget? (car'(lst)) 0 thirdSetVal (+ addToA sumA) (+ addToB sumB) (cdr'(lst)))
+
+          (if((or(and (= sumA 0) (= sumB 0)) (= thirdSetVal 0)))
+             (has-subtarget? 0 0 (car'(lst)) (+addToA sumA) (+ addToB sumB) (cdr'(lst))))
+
+          )))
+    )
+
+

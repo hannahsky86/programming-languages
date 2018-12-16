@@ -1,0 +1,77 @@
+#lang racket
+
+
+(require htdp/testing)
+(require racket/trace)
+
+(check-expect (fact 1) 1)
+(check-expect (fact 2) 2)
+(check-expect (fact 3) 6)
+(check-expect (fact 4) 24)
+(check-expect (fact 5) 120)
+
+
+;; x should be greater than 0
+;; this is an example of embeded recursion
+(define (fact x)
+  (if (= x 1)
+      1
+      (* x (fact (- x 1)))))
+(trace fact)
+
+(define (factT n)
+  (factT-helper n 1)
+)
+
+(define (factT-helper z answer-so-far)
+  (if (= z 1)
+      answer-so-far
+      (factT-helper (- z 1) (* z answer-so-far))))
+(trace factT-helper)
+
+
+
+
+(define factorial (lambda (n)
+                    (if (< n 2)
+                        1 (* n (factorial (- n 1))))))
+
+
+(define list-length (lambda (lst)
+                      (if (null? lst) ; if list is null then add one 
+                         0
+                         ( + 1 (list-length (cdr lst)))))) ; then call list length on the cdr
+
+
+(define sum-list (lambda (lst)
+                   (if (null? lst)
+                       0
+                       (+ (car lst) (sum-list (cdr lst))))))
+
+
+(define has-subtarget? (lambda (lst base f)
+                      (if (null? lst)
+                          base
+                          (f (car lst) (has-subtarget? (cdr lst) base f)))))
+
+
+
+
+
+
+(define list1 '(1 2 4 5 8 6 2 8))
+(define list2 '(4 5 8 6))
+
+(define (sublist? lst1 lst2)        
+      (if (null? lst2)
+          #t
+          (if (and (null? lst1) 
+                   (not (null? lst2)))
+              #f
+              (if (list? (car lst2))
+                  (or (and (sublist? (car lst1) (car lst2))
+                       (sublist? (cdr lst1) (cdr lst2)))
+                      (sublist? (cdr lst1) lst2))
+                  (if (eq? (car lst1) (car lst2))
+                    (sublist? (cdr lst1) (cdr lst2))
+                    (sublist? (cdr lst1) lst2))))))

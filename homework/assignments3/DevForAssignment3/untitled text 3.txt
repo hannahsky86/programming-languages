@@ -1,0 +1,35 @@
+
+(define (two-subsets? li el ld sd)
+    ;; li - list we need to partition
+    ;; el - number of elements we have taken
+    ;; ld - length difference
+    ;; sd - sum difference
+    (cond [(and (not (= el 0))
+        (= ld 0)
+        (= sd 0))
+        ;; we have taken some elements,
+        ;; differences are zero
+        #t]
+        [(null? li)
+        ;; Out of list, then failed
+        #f]
+        ;; Set containing only positive numbers
+        [(two-subsets? (cdr li)
+           (+ el 1)
+           (+ ld 1)
+           (+ sd (car li)))
+        ;;Left hand set
+        #t]
+        [(two-subsets? (cdr li)
+           (+ el 1)
+           (- ld 1)
+           (- sd (car li)))
+        ;;Right hand set
+        #t]
+        [else
+            ;;At last drop the first element of list
+            ;;And then try the others
+            (two-subsets? (cdr li) el ld sd)]))
+
+
+(two-subsets? '(1,1,2,3,4,2) 4 5 2)

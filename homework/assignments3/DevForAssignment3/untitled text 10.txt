@@ -1,0 +1,26 @@
+(define has-target? (lambda (List s1 s2 t1 t2 b1 b2) ;;Initiates function 'min-split' and variables used: list 'L', int 's1', int 's2', int 'mini' (3 Auxilliary parameters)
+  (cond
+    [(null? List)
+     (and
+       (=  s1 t1)
+       (=  s2 t2)
+       ;(=  (+ (car List) s2) x)
+       ;(=  (+ (car List) s2) x)
+       b1
+       b2
+       ;(and b1 #t)
+       ;(and b2 #t)
+      )
+     ]
+    [else
+     (or
+      (has-target? (cdr List)  (+ (car List) s1) s2 t1 t2  b1 b2)
+      (has-target? (cdr List)  s1 (+ (car List) s2) t1 t2 b1 b2)
+      (has-target? (cdr List) (+ (car List) s1) s2 t1 (car List) b1 #t)
+      (has-target? (cdr List) s1 (+ (car List) s2) (car List) t2 #t b2)
+      )
+     ]
+     ;(has-target? (cdr List) s1 (+ (car List) s1) (+ (car List) s2) (car List) (car List) )]
+    )
+  )
+)

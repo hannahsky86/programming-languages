@@ -1,0 +1,16 @@
+(define counter 0)
+(define (sub x y a_list) 
+  (cond
+    ((null? a_list) 
+     '())
+    ((and (>= counter x) (< counter y)) 
+     (begin
+       (set! counter (+ counter 1)) 
+       (cons (car a_list) (sub x y (cdr a_list)))))
+    (else
+     (begin
+       (set! counter (+ counter 1)) 
+       (sub x y (cdr a_list))))))
+
+(sub 1 3 '(X G H S E))
+

@@ -1,0 +1,12 @@
+(define (NumbersMatch myList value)
+  ;need base case
+  
+  ; two conditions - first list is odd the other where the first of the list is even.
+  (cond [(null? myList) '()] ;basecase - if the list is empty, just return the empty list
+        ;[(= value (car myList)) #t] ; now we want to check if the first element is odd ; This is in the [<test> <result>] format
+
+        [(= value (car myList)) (keepEvenNumbers (cdr myList))]
+        [else
+         (cons (car myList)
+               (NumbersMatch (cdr myList)))])) ;we want to glue the first of the list to the rest of the list. Cons glues things together 
+ 

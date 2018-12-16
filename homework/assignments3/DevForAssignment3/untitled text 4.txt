@@ -1,0 +1,111 @@
+#include<stdio.h>
+
+#include<conio.h>
+
+#include<stdlib.h>
+
+# define SIZE 18
+
+typedef struct node
+
+{
+
+                int item;
+
+                struct node*next;
+
+}ListNode;
+
+int search(ListNode *head , int value);
+
+void printNode(Node *head);
+
+void split(ListNode *head , ListNode **MinList , ListNode **MaxList);
+
+int main()
+
+{
+
+ListNode *head=NULL;
+
+ListNode *temp;
+
+ListNode *MinList= NULL;
+
+ListNode *MaxList= NULL;
+
+int array[SIZE]={4,4,5,5,5,5,6,7,7,8,9,10,10,10,10,11,12,15};
+
+int value=0;
+
+int i;
+
+head=(struct node*)malloc(sizeOf(ListNode));
+
+head=temp;
+
+for(i=0;i<SIZE;i++)
+
+{
+
+temp->i=array[i];
+
+if(i==(SIZE))
+
+break;
+
+temp->next=(struct *node)malloc(sizof(ListNode));
+
+temp=temp->next;
+
+}
+
+temp->next=NULL;
+
+printf(CurrentList);
+
+printNode(head);
+
+split(head,&MinList , &MaxList);
+
+}
+
+Void split(ListNode *head ,ListNode **ptrMinList , ListNode **ptrMax)
+
+{
+
+Int rem;
+
+ListNode *temp1 , *temp2 , *temp;
+
+if(head==NULL)
+
+{
+
+Return;
+
+else
+
+{
+
+temp=head;
+
+*ptrMinList=(struct *Node)malloc(sizeof(ListNode));
+
+*ptrMaxList=(struct *Node)malloc(sizeof(ListNode));
+
+temp1=*ptrMinList;
+
+temp2=*ptrMaxList;
+
+while(temp!=Null)
+
+rem=temp->item;
+
+if(rem>MinList && rem<MaxList)
+
+{
+
+printf(
+
+Comment 
